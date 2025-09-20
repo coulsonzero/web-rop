@@ -25,6 +25,11 @@ const router = createRouter({
           name: 'table',
           component: () => import('@/views/TableView.vue'),
         },
+        {
+          path: '/analytic',
+          name: 'analytic',
+          component: () => import('@/views/AnalyticView.vue'),
+        },
       ]
     },
   ],

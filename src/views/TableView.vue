@@ -1,10 +1,11 @@
 <template>
   <div>Table</div>
-  <User />
+  <Customer />
+
 </template>
 
 <script setup>
-import User from '@/components/User.vue'
+import Customer from '@/components/Customer.vue'
 </script>
 
 <style>

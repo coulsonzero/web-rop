@@ -55,113 +55,93 @@
     </div>
   </template>
 
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import { getCustomers, createCustomer, updateCustomer, deleteCustomer, deleteCustomerList } from '@/api/customer'
+<script setup>
+import { ref, onMounted } from 'vue'
+import { getCustomers, createCustomer, updateCustomer, deleteCustomer, deleteCustomerList } from '@/api/customer'
 
-  // date
-  let queryInput = ref('')
-  let tableData = ref([
-    // {
-    //   id: "1",
-    //   name: 'Tom1',
-    //   state: 'California',
-    //   address: 'No. 189, Grove St, Los Angeles',
-    // },
-    // {
-    //   id: "2",
-    //   name: 'Tom2',
-    //   state: 'California',
-    //   address: 'No. 189, Grove St, Los Angeles',
-    // },
-    // {
-    //   id: "3",
-    //   name: 'Tom3',
-    //   state: 'California',
-    //   address: 'No. 189, Grove St, Los Angeles',
-    // },
-  ])
-  let multipleSelection = ref([])
-  let dialogFormVisible = ref(false)
-  let form = ref({})
-  let dialogType = ref('add')
+// date
+let queryInput = ref('')
+let tableData = ref([])
+let multipleSelection = ref([])
+let dialogFormVisible = ref(false)
+let form = ref({})
+let dialogType = ref('add')
 
 
-  // methods
-  // 刷新页面
-  const refreshPage = () => {
-    location.reload();
-  };
+// methods
+// 刷新页面
+const refreshPage = () => {
+  location.reload();
+};
 
-  const handleSelectionChange = (val) => {
-    // multipleSelection.value = val
-    multipleSelection.value = []
-    val.forEach(item => {
-      multipleSelection.value.push(item.ID)
-    })
-  }
-
-  const handleAdd = () => {
-    dialogFormVisible.value = true
-    form.value = {}
-  }
-
-  const handleEdit = (row) => {
-    // 打开弹窗
-    dialogFormVisible.value = true
-    // title
-    dialogType.value = 'edit'
-    // 填充row数据
-    form.value = {...row}
-  }
-
-  const handleDelete = async (row) => {
-    await deleteCustomer(row.ID)
-    // 刷新页面
-    refreshPage()
-  }
-
-  const handleDelList = async () => {
-    await deleteCustomerList({ ids: multipleSelection.value })
-    refreshPage()
-  }
-
-  const handleQueryName = (val) => {
-    if (val.length > 0) {
-      tableData.value = tableData.value.filter(item => item.name.match(val))
-    } else {
-      refreshPage()
-    }
-  }
-
-  const dialogConfirm = async () => {
-    dialogFormVisible.value = false
-
-    if (dialogType.value === 'add') {
-      // 新增用户
-      await createCustomer(form.value)
-    } else if (dialogType.value === 'edit') {
-      // 编辑用户
-      let tem = {
-        "name": form.value.name,
-        "state": form.value.state,
-        "address": form.value.address,
-      }
-      await updateCustomer(form.value.ID, tem)
-    }
-    // 刷新页面
-    refreshPage()
-  }
-
-
-  onMounted(() => {
-    getCustomers().then(res => {
-      tableData.value = res.data.data
-    })
+const handleSelectionChange = (val) => {
+  // multipleSelection.value = val
+  multipleSelection.value = []
+  val.forEach(item => {
+    multipleSelection.value.push(item.ID)
   })
+}
 
-  </script>
+const handleAdd = () => {
+  dialogFormVisible.value = true
+  form.value = {}
+}
 
-  <style>
+const handleEdit = (row) => {
+  // 打开弹窗
+  dialogFormVisible.value = true
+  // title
+  dialogType.value = 'edit'
+  // 填充row数据
+  form.value = {...row}
+}
 
-  </style>
+const handleDelete = async (row) => {
+  await deleteCustomer(row.ID)
+  // 刷新页面
+  refreshPage()
+}
+
+const handleDelList = async () => {
+  await deleteCustomerList({ ids: multipleSelection.value })
+  refreshPage()
+}
+
+const handleQueryName = (val) => {
+  if (val.length > 0) {
+    tableData.value = tableData.value.filter(item => item.name.match(val))
+  } else {
+    refreshPage()
+  }
+}
+
+const dialogConfirm = async () => {
+  dialogFormVisible.value = false
+
+  if (dialogType.value === 'add') {
+    // 新增用户
+    await createCustomer(form.value)
+  } else if (dialogType.value === 'edit') {
+    // 编辑用户
+    let tem = {
+      "name": form.value.name,
+      "state": form.value.state,
+      "address": form.value.address,
+    }
+    await updateCustomer(form.value.ID, tem)
+  }
+  // 刷新页面
+  refreshPage()
+}
+
+
+onMounted(() => {
+  getCustomers().then(res => {
+    tableData.value = res.data.data
+  })
+})
+
+</script>
+
+<style>
+</style>
