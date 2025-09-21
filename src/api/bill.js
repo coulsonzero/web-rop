@@ -20,3 +20,14 @@ export function getBillByName(name) {
         method: 'get',
     })
 }
+
+export function getBillByPage(queryForm) {
+    return request({
+        url: '/bills/list',
+        method: 'post',
+        data: {
+            "page_num": queryForm.pageNum,
+            "page_size": queryForm.pageSize,
+        }
+    })
+}
