@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{c as r,a as c}from"./index-BXVcyc2H.js";const t={};function o(a,n){return c(),r("div",null,"chart")}const f=e(t,[["render",o]]);export{f as default};
