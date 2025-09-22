@@ -12,7 +12,7 @@
     <el-table-column prop="name" label="商家" width="180" />
     <el-table-column prop="expense" label="金额(元)" width="180"/>
     <el-table-column prop="pay_method" label="支付方式" width="180"/>
-    <el-table-column prop="receipt_payment" label="收/支" width="180"/>
+    <el-table-column prop="receipt_payment" label="收/支" width="80"/>
     <el-table-column prop="description" label="描述" />
   </el-table>
   <!-- 分页 -->
@@ -88,6 +88,7 @@ const searchClick = (row) => {
   }
   getBillByName(row.name).then(res => {
     tableData.value = res.data.data
+
   })
 }
 

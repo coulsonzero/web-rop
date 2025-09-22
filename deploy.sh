@@ -15,7 +15,7 @@ git add -A
 git commit -m 'deploy web-rop'
 
 # 如果发布到https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:coulsonzero/react-dashboard.git master:gh-pages
+git push -f git@github.com:coulsonzero/web-rop.git master:gh-pages
 
 cd -
 
